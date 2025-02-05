@@ -14,13 +14,17 @@ public class Util {
             "jdbc:mysql://localhost:3306/users_data_kata";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
+    static Connection connection = null;
 
     private static org.hibernate.SessionFactory sessionFactory;
 
-    public static Connection getConnection() throws SQLException {
-        Connection connection = null;
-        connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        return connection;
+    public static Connection getConnection()   {
+        try {
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            return connection;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static SessionFactory getSessionFactory() {
@@ -49,9 +53,17 @@ public class Util {
         return sessionFactory;
     }
 
-    public static void shutdown() {
+    public static void closeSessionFactory() {
         if (sessionFactory != null) {
             sessionFactory.close();
         }
     }
+
+    public static void closeConnect() throws SQLException {
+        if (connection != null) {
+            connection.close();
+        }
+    }
+
+
 }

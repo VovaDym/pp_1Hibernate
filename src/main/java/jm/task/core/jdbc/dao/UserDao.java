@@ -18,5 +18,5 @@ public interface UserDao {
 
     void cleanUsersTable();
 
-    public void closeSession() throws SQLException;
+
 }

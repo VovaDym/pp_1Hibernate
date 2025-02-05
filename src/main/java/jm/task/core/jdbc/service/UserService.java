@@ -17,6 +17,4 @@ public interface UserService {
     List<User> getAllUsers();
 
     void cleanUsersTable();
-
-    public void closeSession() throws SQLException;
 }

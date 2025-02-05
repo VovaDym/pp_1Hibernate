@@ -105,11 +105,4 @@ public class UserDaoHibernateImpl implements UserDao {
             query.executeUpdate();
         });
     }
-
-    @Override
-    public void closeSession() {
-        if (session != null) {
-            session.close();
-        }
-    }
 }
