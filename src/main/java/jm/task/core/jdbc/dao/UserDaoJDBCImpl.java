@@ -17,6 +17,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     Connection connection = Util.getConnection();
     PreparedStatement preparedStatement = null;
+
     String sql;
 
     public void createUsersTable() {
@@ -77,12 +78,13 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
         sql = "SELECT * FROM users";
+        ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 User user = new User(resultSet.getString("name"),
                         resultSet.getString("lastName"),
@@ -92,6 +94,8 @@ public class UserDaoJDBCImpl implements UserDao {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            resultSet.close();
         }
         return users;
     }

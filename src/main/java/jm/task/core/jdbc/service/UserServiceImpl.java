@@ -15,7 +15,7 @@ import java.util.List;
 
 public class UserServiceImpl  implements UserService {
 
-    UserDao  dao = new UserDaoHibernateImpl();
+    UserDao  dao = new UserDaoJDBCImpl();
 
     public UserServiceImpl() throws SQLException {
     }
@@ -37,7 +37,7 @@ public class UserServiceImpl  implements UserService {
         dao.removeUserById(id);
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws SQLException {
         return dao.getAllUsers();
     }
 
