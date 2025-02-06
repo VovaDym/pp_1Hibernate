@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 public class UserDaoHibernateImpl implements UserDao {
     private Transaction transaction = null;
-    private final Session session = Util.getSessionFactory().openSession();
+    private Session session = Util.getSessionFactory().openSession();
 
     public UserDaoHibernateImpl() {
 
