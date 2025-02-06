@@ -12,15 +12,15 @@ import java.util.function.Function;
 
 public class UserDaoHibernateImpl implements UserDao {
     private Transaction transaction = null;
-    private final Session session = Util.getSessionFactory().openSession();
+
 
     public UserDaoHibernateImpl() {
 
     }
 
-    // Helper method to execute operations within a transaction
+    // Вспомогательный метод для выполнения операций в рамках транзакции
     private void executeInsideTransaction(Consumer<Session> action) {
-        try {
+        try (Session session = Util.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
             action.accept(session);
             transaction.commit();
@@ -32,10 +32,10 @@ public class UserDaoHibernateImpl implements UserDao {
         }
     }
 
-    // Helper method to execute operations and return value within a transaction
+    // Вспомогательный метод для выполнения операций и возврата значения в рамках транзакции
     private <T> T executeInsideTransaction(Function<Session, T> action) {
         T result = null;
-        try {
+        try (Session session = Util.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
             result = action.apply(session);
             transaction.commit();
