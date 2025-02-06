@@ -62,9 +62,6 @@ public class Util {
     public static void closeConnect() throws SQLException {
         if (connection != null) {
             connection.close();
-
         }
     }
-
-
 }

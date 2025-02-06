@@ -26,6 +26,6 @@ public class Main {
 
         userService.dropUsersTable();
 
-        Util.closeConnect();
+        Util.closeSessionFactory();
     }
 }
