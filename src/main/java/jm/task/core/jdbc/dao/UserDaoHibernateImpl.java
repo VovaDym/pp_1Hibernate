@@ -11,8 +11,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class UserDaoHibernateImpl implements UserDao {
-    private Transaction transaction = null;
-
 
     public UserDaoHibernateImpl() {
 
@@ -20,6 +18,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     // Вспомогательный метод для выполнения операций в рамках транзакции
     private void executeInsideTransaction(Consumer<Session> action) {
+        Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
             action.accept(session);
@@ -34,6 +33,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     // Вспомогательный метод для выполнения операций и возврата значения в рамках транзакции
     private <T> T executeInsideTransaction(Function<Session, T> action) {
+        Transaction transaction = null;
         T result = null;
         try (Session session = Util.getSessionFactory().openSession()){
             transaction = session.beginTransaction();

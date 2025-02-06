@@ -10,10 +10,10 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 255)
     private String name;
 
-    @Column(name = "lastName")
+    @Column(name = "lastName", length = 255)
     private String lastName;
 
     @Column(name = "age")
