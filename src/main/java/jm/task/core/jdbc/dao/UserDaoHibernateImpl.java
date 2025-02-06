@@ -18,7 +18,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     }
 
-    // Helper method to execute operations within a transaction
+    // Вспомогательный метод для выполнения операций в рамках транзакции
     private void executeInsideTransaction(Consumer<Session> action) {
         try {
             transaction = session.beginTransaction();
@@ -32,7 +32,7 @@ public class UserDaoHibernateImpl implements UserDao {
         }
     }
 
-    // Helper method to execute operations and return value within a transaction
+    // Вспомогательный метод для выполнения операций и возврата значения в рамках транзакции
     private <T> T executeInsideTransaction(Function<Session, T> action) {
         T result = null;
         try {
